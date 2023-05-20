@@ -8,7 +8,7 @@ try:
 except ImportError as error:
     import time, os
 
-    print(error + '\nSome requirements are not installed.')
+    print(str(error) + '\nSome requirements are not installed. \n')
     requirements = ['pyzipper', 'requests']
 
     for requirement in requirements:
@@ -40,21 +40,12 @@ parser.add_argument('--threads', '-t', type=int, required=False,
 args = parser.parse_args()
 start = datetime.datetime.now()
 
-def update_script():
-    version = requests.get('https://github.com/TrollSkull/BashTube/releases/latest').text
-
-    with open('new.txt', 'wb') as f:
-        f.write(version)
-
 def check_zip(file):
     if not os.path.isfile(file):
         sys.exit(f'File "{file}" does not exist.')
 
     if not os.path.splitext(file)[1] == '.zip':
         sys.exit(f'File "{file}" is not a ZIP file.')
-
-def make_passwords(wordlist):
-    pass
 
 def extract_zip(zipfile, password_list, thread_index, num_threads):
     with pyzipper.AESZipFile(zipfile) as zf:
