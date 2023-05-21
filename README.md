@@ -4,7 +4,7 @@
 [![Bash](https://img.shields.io/badge/Made%20with-Python-blue)]()
 [![License](https://img.shields.io/badge/License-GPL-yellow)]()
 
-desc here
+ZipCracker is a tool to crack .zip files passwords using wordlist files, see more at [usage](#usage) and [test files](#test-files) to use the tool correctly.
 
 ## INSTALLATION
 ### One line installation.
@@ -47,7 +47,7 @@ options:
 
 ## TEST FILES
 
-You can test ZipCracker by using the files in the `/test` folder, the correct password will be in row `73722`, you can test changing the number of threads with `-t` and see the speed changes when using different threads.
+You can test `ZipCracker` speed and power by using the files in the `/test` folder, the correct password will be in row `73722`, you can test changing the number of threads with `-t` and see the speed changes when using different threads.
 
 `python zipcracker.py test/test.zip -t 4 -f test/wordlist.txt`
     
