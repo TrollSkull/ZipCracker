@@ -5,15 +5,12 @@ try:
     import pyzipper
     import requests
 except ImportError:
-    import subprocess, os
+    import os
 
     requirements = ['requests', 'pyzipper']
 
     for requirement in requirements:
-        if os.system == 'win32':
-            subprocess.run([f'pip install {requirement}'], shell=True)
-        else:
-            subprocess.run([f'pip install {requirement}'])
+        os.system(f'pip install {requirement}')
 
 from concurrent.futures import ThreadPoolExecutor
 import requests
