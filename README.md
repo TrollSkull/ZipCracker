@@ -25,6 +25,9 @@ $ cd ZipCracker
 $ python translator.py or python zipcracker.py
 ```
 
+## WORDLIST
+You can download a wordlist with over 14 million passwords **[here](https://github.com/TrollSkull/ZipCracker/releases/download/wordlist/wordlist.txt)**.
+
 ## USAGE
 
 To get a list of all options use the `--help` command.
