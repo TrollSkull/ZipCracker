@@ -53,4 +53,4 @@ You can test ZipCracker by using the files in the `/test` folder, the correct pa
     
 ### LICENCE
 
-**[GPL 3-0 License © MorseTranslator](https://github.com/TrollSkull/ZipCracker/blob/main/LICENSE)**
+**[GPL 3-0 License © ZipCracker](https://github.com/TrollSkull/ZipCracker/blob/main/LICENSE)**
