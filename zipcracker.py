@@ -31,7 +31,7 @@ parser = argparse.ArgumentParser(description='Zipfile bruteforce v1.0 by TrollSk
 
 parser.add_argument('zipfile', help='zip file name here.')
 
-parser.add_argument('--passwfile', '-f', type=str, required=False,
+parser.add_argument('--passwfile', '-f', type=str, required=True,
                     help='if you have a password list for bruteforce, you can input using "-f passw.txt"')
 
 parser.add_argument('--threads', '-t', type=int, required=False,
@@ -48,23 +48,28 @@ def check_zip(file):
         sys.exit(f'File "{file}" is not a ZIP file.')
 
 def extract_zip(zipfile, password_list, thread_index, num_threads):
-    with pyzipper.AESZipFile(zipfile) as zf:
+    try:
+        with pyzipper.AESZipFile(zipfile) as zf:
 
-        global trys
-        trys = 0
+            global trys
+            trys = 0
 
-        for password in password_list:
-            trys += 1
-            try:
-                password = password.strip()
-                zf.pwd = password
-                zf.extractall()
+            for password in password_list:
+                trys += 1
+                try:
+                    password = password.strip()
+                    zf.pwd = password
+                    zf.extractall()
 
-                print(f"Zip file unlocked with password: {password.decode('utf-8')}")
-                sys.exit(0)
+                    print(f"Zip file unlocked with password: {password.decode('utf-8')}")
+                    sys.exit(0)
 
-            except RuntimeError:
-                continue
+                except RuntimeError:
+                    continue
+
+    except pyzipper.zipfile.BadZipFile as error:
+        print(str(error))
+        sys.exit(1)
 
 def run_threads(zipfile, passwords, num_threads):
     chunk_size = len(passwords) // num_threads
@@ -85,7 +90,7 @@ def run_threads(zipfile, passwords, num_threads):
 def main():
     check_zip(args.zipfile)
 
-    with open('passwlist/passwlist.txt', 'rb') as f:
+    with open(args.passwfile, 'rb') as f:
         passwords = f.readlines()
 
     num_threads = args.threads if args.threads else 1
