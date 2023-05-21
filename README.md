@@ -52,8 +52,10 @@ options:
 
 You can test `ZipCracker` speed and power by using the files in the `/test` folder, the correct password will be in row `73722`, you can test changing the number of threads with `-t` and see the speed changes when using different threads.
 
-`python zipcracker.py test/test.zip -t 4 -f test/wordlist.txt`
-    
+```bash
+python zipcracker.py test/test.zip -t 4 -f test/wordlist.txt
+```
+
 ### LICENCE
 
 **[GPL 3-0 License © ZipCracker](https://github.com/TrollSkull/ZipCracker/blob/main/LICENSE)**
