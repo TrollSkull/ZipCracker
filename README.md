@@ -13,7 +13,7 @@ Just copy this line and paste in the terminal.
 apt install -y git python; git clone https://github.com/TrollSkull/ZipCracker; cd easyTPKG; python zipcracker.py
 ```
 
-You can download MorseTranslator on any platform by cloning the official Git repository:
+You can download ZipCracker on any platform by cloning the official Git repository:
 
 ```bash
 $ apt install -y git python
