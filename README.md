@@ -36,7 +36,7 @@ You can download a wordlist with over 14 million passwords **[here](https://gith
 To get a list of all options use the `--help` command.
 
 ```
-usage: zipcracker.py file.zip -t 4 -f passwords.txt    
+usage: zipcracker.py file.zip -t 4 -w wordlist.txt    
 
 Zipfile cracker v1.0 by TrollSkull
 
