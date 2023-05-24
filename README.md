@@ -42,8 +42,8 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --passwfile PASSWFILE, -f PASSWFILE
-                        if you have a password list for bruteforce, you can input using "-f passw.txt"
+  --wordlist WORDLIST, -w WORDLIST
+                        if you have a wordlist list for bruteforce, you can input using "-w wordlist.txt"
   --threads THREADS, -t THREADS
                         number of instances of python, this will use more CPU, I recommend a maximum of 4 threads
 ```
