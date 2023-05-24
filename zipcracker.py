@@ -15,7 +15,7 @@ parser = argparse.ArgumentParser(description='Zipfile cracker v1.0 by TrollSkull
 parser.add_argument('zipfile', help='zip file name here.')
 
 parser.add_argument('--wordlist', '-w', type=str, required=True,
-                    help='if you have a password list for bruteforce, you can input using "-f passw.txt"')
+                    help='if you have a wordlist list for bruteforce, you can input using "-w wordlist.txt"')
 
 parser.add_argument('--threads', '-t', type=int, required=False,
                     help='number of instances of python, this will use more CPU, I recommend a maximum of 4 threads')
