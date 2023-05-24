@@ -1,22 +1,11 @@
 __author__ = 'TrollSkull'
-__version__ = '1.0'
+__version__ = '2.0'
 
-try:
-    import pyzipper
-    import requests
-except ImportError:
-    import os
-
-    requirements = ['requests', 'pyzipper']
-
-    for requirement in requirements:
-        os.system(f'pip install {requirement}')
-
-from concurrent.futures import ThreadPoolExecutor
-import requests
-import argparse
-import pyzipper
+from concurrent.futures import ThreadPoolExecutor, wait
+import threading
 import datetime
+import argparse
+import zipfile
 import sys
 import os
 
@@ -25,7 +14,7 @@ parser = argparse.ArgumentParser(description='Zipfile cracker v1.0 by TrollSkull
 
 parser.add_argument('zipfile', help='zip file name here.')
 
-parser.add_argument('--passwfile', '-f', type=str, required=True,
+parser.add_argument('--wordlist', '-w', type=str, required=True,
                     help='if you have a password list for bruteforce, you can input using "-f passw.txt"')
 
 parser.add_argument('--threads', '-t', type=int, required=False,
@@ -34,6 +23,7 @@ parser.add_argument('--threads', '-t', type=int, required=False,
 args = parser.parse_args()
 start = datetime.datetime.now()
 trys = 0
+verified_passwords = set()
 
 def check_zip(file):
     if not os.path.isfile(file):
@@ -42,53 +32,74 @@ def check_zip(file):
     if not os.path.splitext(file)[1] == '.zip':
         sys.exit(f'File "{file}" is not a ZIP file.')
 
-def extract_zip(zipfile, password_list, thread_index):
+def extract_zip(zip_file, password_list):
     global trys
 
     try:
-        with pyzipper.AESZipFile(zipfile) as zf:
+        with zipfile.ZipFile(zip_file, 'r') as zf:
             for password in password_list:
-                try:
-                    password = password.strip()
-                    zf.pwd = password
-                    zf.extractall(pwd=password)
+                if found_password.is_set():
+                    break
 
-                    print(f"Zip file unlocked with password: {password.decode('utf-8')}")
-                    sys.exit(0)
+                try:
+                    password = password.strip().decode('utf-8')
+                    zf.extractall(path=None, pwd=password.encode('utf-8'))
+
+                    with results_lock:
+                        found_password.set()
+                        finish = datetime.datetime.now()
+                        total = int((finish - start).total_seconds())
+
+                        print(f'\nZip file unlocked with password: {password}')
+                        print(f'It took {total} seconds to decipher, {trys} attempts in total.')
+
+                    return password
 
                 except Exception:
                     continue
 
                 finally:
                     trys += 1
+                    if password not in verified_passwords:
+                        verified_passwords.add(password)
 
-    except pyzipper.zipfile.BadZipFile as error:
+                        sys.stdout.write(f"\rVerified passwords: {trys}")
+                        sys.stdout.flush()
+
+    except zipfile.BadZipFile as error:
         print(str(error))
         sys.exit(1)
 
-def run_threads(zipfile, passwords, num_threads):
+def run_threads(zip_file, passwords, num_threads):
     with ThreadPoolExecutor(max_workers=num_threads) as executor:
         chunk_size = (len(passwords) + num_threads - 1) // num_threads
         password_chunks = [passwords[i:i+chunk_size] for i in range(0, len(passwords), chunk_size)]
+        futures = []
 
-        for i, password_chunk in enumerate(password_chunks):
-            executor.submit(extract_zip, zipfile, password_chunk, i)
+        for password_chunk in password_chunks:
+            future = executor.submit(extract_zip, zip_file, password_chunk)
+            futures.append(future)
+
+        done, _ = wait(futures, return_when='FIRST_COMPLETED')
+
+        for future in done:
+            if future.done() and future.result() is not None:
+                break
 
 def main():
     check_zip(args.zipfile)
 
-    if not os.path.isfile(args.passwfile):
-        sys.exit(f'File "{args.passwfile}" does not exist.')
+    if not os.path.isfile(args.wordlist):
+        sys.exit(f'File "{args.wordlist}" does not exist.')
 
-    with open(args.passwfile, 'rb') as f:
+    with open(args.wordlist, 'rb') as f:
         passwords = f.readlines()
 
     num_threads = args.threads if args.threads else 1
-    run_threads(args.zipfile, passwords=passwords, num_threads=num_threads)
+    run_threads(args.zipfile, passwords, num_threads)
 
 if __name__ == '__main__':
-    main()
+    found_password = threading.Event()
+    results_lock = threading.Lock()
 
-finish = datetime.datetime.now()
-total = int((finish - start).total_seconds())
-print(f'It took {total} seconds to decipher, {trys} attempts in total.')
+    main()
