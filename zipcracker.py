@@ -10,7 +10,7 @@ import sys
 import os
 
 parser = argparse.ArgumentParser(description='Zipfile cracker v1.0 by TrollSkull',
-                                 usage="zipcracker.py file.zip -t 4 -f passwords.txt")
+                                 usage="zipcracker.py file.zip -t 4 -w wordlist.txt")
 
 parser.add_argument('zipfile', help='zip file name here.')
 
