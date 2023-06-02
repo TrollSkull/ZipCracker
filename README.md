@@ -13,7 +13,7 @@ This script is not made with malicious intent, it was built for educational purp
 ### One line installation.
 Just copy this line and paste in the terminal.
 ```bash
-apt install -y git python; git clone https://github.com/TrollSkull/ZipCracker; cd easyTPKG; python zipcracker.py
+apt install -y git python; git clone https://github.com/TrollSkull/ZipCracker; cd ZipCracker; python zipcracker.py
 ```
 
 You can download ZipCracker on any platform by cloning the official Git repository:
