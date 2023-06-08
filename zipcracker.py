@@ -1,6 +1,3 @@
-__author__ = 'TrollSkull'
-__version__ = '2.0'
-
 from concurrent.futures import ThreadPoolExecutor, wait
 import threading
 import datetime
@@ -8,6 +5,9 @@ import argparse
 import zipfile
 import sys
 import os
+
+__author__ = 'TrollSkull'
+__version__ = '2.0'
 
 parser = argparse.ArgumentParser(description='Zipfile cracker v1.0 by TrollSkull',
                                  usage="zipcracker.py file.zip -t 4 -w wordlist.txt")
