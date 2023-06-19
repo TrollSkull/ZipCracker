@@ -11,7 +11,7 @@ ZipCracker is a tool to crack .zip files passwords using wordlist files, see mor
 2. [Installation](#installation)
 3. [Wordlist](#wordlist)
 4. [Usage](#usage)
-5. [Test Files](#test_files)
+5. [Test Files](#test-files)
 6. [License](#license)
 
 ## Disclaimer
