@@ -4,9 +4,13 @@
 [![Bash](https://img.shields.io/badge/Made%20with-Python-blue)]()
 [![License](https://img.shields.io/badge/License-GPL-yellow)]()
 
-### Table of content
+### Table of content.
 1. [Disclaimer](#disclaimer)
-2.
+2. [Installation](#installation)
+3. [Wordlist](#wordlist)
+4. [Usage](#usage)
+5. [Test Files]
+6. [License](#license)
 
 ZipCracker is a tool to crack .zip files passwords using wordlist files, see more at [usage](#usage) and [test files](#test-files) to use the tool correctly.
 
