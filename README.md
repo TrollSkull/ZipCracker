@@ -67,6 +67,6 @@ You can test `ZipCracker` speed and power by using the files in the `/test` fold
 python zipcracker.py test/test.zip -t 4 -f test/wordlist.txt
 ```
 
-### LICENCE
+### LICENSE
 
 **[GPL 3-0 License © ZipCracker](https://github.com/TrollSkull/ZipCracker/blob/main/LICENSE)**
