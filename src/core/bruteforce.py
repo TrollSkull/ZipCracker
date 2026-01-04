@@ -1,4 +1,4 @@
-#import time
+#   import time
 from fast_zip import bruteforce_zip
 
 def bruteforce_zip(zip_file, password_list):
