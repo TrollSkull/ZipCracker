@@ -1,0 +1,12 @@
+[package]
+name = "fast_zip"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.21", features = ["extension-module"] }
+zip = "0.6"
+rayon = "1.8"
