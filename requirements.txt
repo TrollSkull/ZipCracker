@@ -1,4 +1,2 @@
-PyInstaller
 maturin
-PySide6
-venv
+customtkinter
