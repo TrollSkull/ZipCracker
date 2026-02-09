@@ -1,2 +1,3 @@
 maturin
 customtkinter
+pyinstaller
